@@ -55,11 +55,28 @@ export function BottomNavbar() {
   
     try {
       // First try to find user by Farcaster ID
+      let userId: string | undefined;
+
       const farcasterRef = doc(db, "farcasterIndex", String(context.user.fid));
       const farcasterSnap = await getDoc(farcasterRef);
   
       if (farcasterSnap.exists()) {
-        const { userId } = farcasterSnap.data();
+        userId = farcasterSnap.data().userId;
+      } else {
+        const usersRef = collection(db, "users");
+        const q = query(usersRef, where("wallets", "array-contains", address.toLowerCase()));
+        const querySnapshot = await getDocs(q);
+        if (!querySnapshot.empty) {
+          userId = querySnapshot.docs[0].id;
+        }
+      }
+      if (userId) {
+        // If already on your profile page, just close modal and stop loading
+        if (pathname === `/frens/${userId}`) {
+          closeProfile();
+          setLoading(false);
+          return;
+        }
         closeProfile();
         router.push(`/frens/${userId}`);
         return;
