@@ -2,11 +2,12 @@
 import { useMiniAppContext } from "@/hooks/use-miniapp-context";
 import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { FaHome,FaUserFriends } from "react-icons/fa";
 import { BsPersonCircle } from "react-icons/bs";
 import { useEffect } from "react";
 import { useDisconnect, useAccount, useBalance,useConnect, useSwitchChain} from "wagmi";
+
 import { formatEther } from "viem";
 import { monadTestnet } from "viem/chains";
 import { farcasterFrame } from "@farcaster/frame-wagmi-connector";
@@ -25,9 +26,33 @@ export function BottomNavbar() {
   const { disconnect } = useDisconnect();
   const { connect } = useConnect();
   const { switchChain } = useSwitchChain();
-  const { data: balance } = useBalance({
+  const { data: balance, refetch: refetchBalance } = useBalance({
     address
-    });
+  });
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  
+  useEffect(() => {
+    // Clear interval when modal closes
+    if (!showProfile && intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+    // When profile modal opens, fetch balance and start interval
+    if (showProfile && address) {
+      refetchBalance();
+      intervalRef.current = setInterval(() => {
+        refetchBalance();
+      }, 30000); // 30 seconds
+    }
+    // Cleanup on unmount
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
+  }, [showProfile, address, refetchBalance]);
+
   useEffect(() => {
     setLoading(false);
   }, [pathname]);

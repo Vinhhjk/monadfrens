@@ -4,17 +4,17 @@ export interface Token {
 }
 
 export interface TrendingTokenPair {
-    marketAddress: string;  // Add this line
+    marketAddress: string; 
     baseToken: Token;
     quoteToken: Token;
-    volume5m: number;  // Add this line too since we're using it
+    volume5m: number; 
 }
 
 export interface TrendingTokensResponse {
     trendingPairs: TrendingTokenPair[];
 }
 
-// Add interface for the API response token structure
+// interface for the API response token structure
 export interface APIToken {
     market: string; 
     basetoken: {

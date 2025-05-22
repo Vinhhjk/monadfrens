@@ -14,14 +14,12 @@ import {
 } from "wagmi";
 import { farcasterFrame } from "@farcaster/frame-wagmi-connector";
 
-// ...existing code...
 export function WalletActions() {
   const { isEthProviderAvailable, context } = useMiniAppContext();
   const { isConnected, address, chainId } = useAccount();
   const { disconnect } = useDisconnect();
   const { switchChain } = useSwitchChain();
   const { connect } = useConnect();
-  // Add this effect to handle wallet connect
   useEffect(() => {
     const handleWalletConnect = async () => {
       if (isConnected && address && context?.user?.fid) {

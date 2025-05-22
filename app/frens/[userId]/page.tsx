@@ -66,7 +66,6 @@ export default function FrenDetailPage() {
           @{user.username || user.farcasterId || userId}
         </div>
         
-        {/* Replace the wallet addresses display with UserPortfolio */}
         <UserPortfolio userId={userId} />
       </div>
     </div>
