@@ -4,7 +4,8 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "@/utils/firebase";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
-
+import dynamic from "next/dynamic";
+import UserPnL from "@/components/UserData/userPnL";
 export default function FrensPage() {
   const [search, setSearch] = useState("");
   const [results, setResults] = useState<any[]>([]);
@@ -188,6 +189,9 @@ export default function FrensPage() {
             </div>
           </div>
         )}
+      </div>
+      <div className="w-full max-w-2xl">
+        <UserPnL />
       </div>
     </div>
   );

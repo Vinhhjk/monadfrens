@@ -14,6 +14,8 @@ export function UserPortfolio({ userId }: UserPortfolioProps) {
 
     const [portfolio, setPortfolio] = useState<FormattedTokenData[]>([]);
     const [loading, setLoading] = useState(true);
+    const [isNavigating, setIsNavigating] = useState(false);
+
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
@@ -49,7 +51,8 @@ export function UserPortfolio({ userId }: UserPortfolioProps) {
     }, [userId]);
     const handleTokenClick = (marketAddress: string | null) => {
         if (marketAddress) {
-            router.push(`/tokens/${marketAddress}`);
+          setIsNavigating(true);
+          router.push(`/tokens/${marketAddress}`);
         }
     };
     if (loading) {
@@ -65,7 +68,16 @@ export function UserPortfolio({ userId }: UserPortfolioProps) {
     }
 
     return (
+      
         <div className="space-y-4">
+          {isNavigating && (
+            <div className="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50">
+              <div className="text-center">
+                <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500 mx-auto"></div>
+                <p className="mt-4 text-gray-400">Loading token data...</p>
+              </div>
+            </div>
+          )}
           <h2 className="text-xl font-bold mb-4 text-white">Portfolio</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {portfolio.map((token) => (
