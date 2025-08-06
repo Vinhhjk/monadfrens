@@ -1,6 +1,7 @@
 # Monad Frens 🚀
 
 **Monad Frens** is a Farcaster MiniApp that lets you trade tokens on the Monad Blockchain, discover and connect with frens, and explore the Monad ecosystem—all in one seamless experience.
+**Miniapp link:** https://farcaster.xyz/miniapps/LOjNrsn19Dyg/monad-frens-miniapp
 
 ![Monad Frens Banner](public/images/feed.png)
 
@@ -26,7 +27,7 @@
 ### Installation
 
 ```bash
-git clone https://github.com/yourusername/monadfrens.git
+git clone https://github.com/Vinhhjk/monadfrens.git
 cd monadfrens
 yarn install
 # or
