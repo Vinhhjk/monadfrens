@@ -1,6 +1,6 @@
 # Monad Frens 🚀
 
-**Monad Frens** is a Farcaster MiniApp that lets you trade tokens on the Monad Blockchain, discover and connect with frens, and explore the Monad ecosystem—all in one seamless experience.
+**Monad Frens** is a Farcaster MiniApp that lets you trade tokens on the Monad Blockchain, discover and connect with frens, and explore the Monad ecosystem—all in one seamless experience. 
 **Miniapp link:** https://farcaster.xyz/miniapps/LOjNrsn19Dyg/monad-frens-miniapp
 
 ![Monad Frens Banner](public/images/feed.png)
